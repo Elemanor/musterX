@@ -1,0 +1,229 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { EnhancedMarketplace } from '../components/EnhancedMarketplace';
+import { Badge } from '../components/ui/badge';
+import { Card, CardContent } from '../components/ui/card';
+
+const marketplaceFeatures = [
+  {
+    title: "Get Multiple Bids",
+    description: "Receive 2-4 competitive quotes from verified handymen",
+    icon: "Users"
+  },
+  {
+    title: "100+ Services",
+    description: "From simple repairs to complex installations",
+    icon: "Package"
+  },
+  {
+    title: "Verified Professionals",
+    description: "WSIB cleared, licensed, and insured handymen",
+    icon: "Shield"
+  },
+  {
+    title: "Fast Response",
+    description: "Most bids received within 30 minutes",
+    icon: "Clock"
+  }
+];
+---
+
+<Layout title="Handyman Marketplace Toronto | Compare Quotes | 100+ Services">
+  <Fragment slot="head">
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Handyman Services Marketplace - Toronto",
+        "description": "Post your job and get competitive bids from verified handymen. 100+ repair and installation services available.",
+        "url": "https://renonext.com/marketplace",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "RenoNext Handyman",
+          "url": "https://renonext.com"
+        }
+      })}
+    </script>
+  </Fragment>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-b from-primary/5 to-white py-12 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          Toronto's Flexible Handyman Marketplace
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
+          Get competitive quotes OR name your own price. From simple fixes to complex repairs - you're in control!
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <Badge variant="secondary" className="px-3 py-1">100+ Service Types</Badge>
+          <Badge variant="secondary" className="px-3 py-1">Name Your Price Option</Badge>
+          <Badge variant="secondary" className="px-3 py-1">Market Rate Transparency</Badge>
+          <Badge variant="secondary" className="px-3 py-1">No Job Too Small</Badge>
+          <Badge variant="secondary" className="px-3 py-1">WSIB & Licensed</Badge>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="py-12 px-4 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-8">How the Marketplace Works</h2>
+      <div class="grid md:grid-cols-4 gap-6">
+        <Card>
+          <CardContent className="pt-6 text-center">
+            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-xl font-bold text-primary">1</span>
+            </div>
+            <h3 class="font-semibold mb-2">Post Your Job</h3>
+            <p class="text-sm text-muted-foreground">
+              Describe what you need done and upload photos
+            </p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="pt-6 text-center">
+            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-xl font-bold text-primary">2</span>
+            </div>
+            <h3 class="font-semibold mb-2">Receive Bids</h3>
+            <p class="text-sm text-muted-foreground">
+              Get 2-4 quotes from qualified handymen within 30 minutes
+            </p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="pt-6 text-center">
+            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-xl font-bold text-primary">3</span>
+            </div>
+            <h3 class="font-semibold mb-2">Compare & Choose</h3>
+            <p class="text-sm text-muted-foreground">
+              Review profiles, ratings, and prices to pick the best fit
+            </p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="pt-6 text-center">
+            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-xl font-bold text-primary">4</span>
+            </div>
+            <h3 class="font-semibold mb-2">Get It Done</h3>
+            <p class="text-sm text-muted-foreground">
+              Your chosen handyman completes the job with quality guarantee
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enhanced Marketplace Interface -->
+  <section class="py-12 px-4 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <EnhancedMarketplace client:load />
+    </div>
+  </section>
+
+  <!-- Trust Indicators -->
+  <section class="py-12 px-4 bg-white">
+    <div class="max-w-4xl mx-auto">
+      <Card className="bg-primary/5 border-primary/20">
+        <CardContent className="pt-6">
+          <h3 class="text-xl font-bold mb-4 text-center">Why Use Our Marketplace?</h3>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-semibold mb-2">For Homeowners:</h4>
+              <ul class="space-y-2 text-sm">
+                <li class="flex items-start">
+                  <span class="text-green-500 mr-2">✓</span>
+                  Compare multiple quotes instantly
+                </li>
+                <li class="flex items-start">
+                  <span class="text-green-500 mr-2">✓</span>
+                  All handymen are verified and insured
+                </li>
+                <li class="flex items-start">
+                  <span class="text-green-500 mr-2">✓</span>
+                  Read real reviews from past customers
+                </li>
+                <li class="flex items-start">
+                  <span class="text-green-500 mr-2">✓</span>
+                  Quality guarantee on all work
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-2">Our Standards:</h4>
+              <ul class="space-y-2 text-sm">
+                <li class="flex items-start">
+                  <span class="text-blue-500 mr-2">→</span>
+                  WSIB clearance required for all pros
+                </li>
+                <li class="flex items-start">
+                  <span class="text-blue-500 mr-2">→</span>
+                  Licensed trades for electrical (ESA), plumbing (306A)
+                </li>
+                <li class="flex items-start">
+                  <span class="text-blue-500 mr-2">→</span>
+                  $2M liability insurance minimum
+                </li>
+                <li class="flex items-start">
+                  <span class="text-blue-500 mr-2">→</span>
+                  Background checks completed
+                </li>
+              </ul>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  </section>
+
+  <!-- Statistics -->
+  <section class="py-12 px-4 bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-6 text-center">
+        <div>
+          <p class="text-3xl font-bold text-primary">2,500+</p>
+          <p class="text-sm text-muted-foreground">Jobs Completed</p>
+        </div>
+        <div>
+          <p class="text-3xl font-bold text-primary">150+</p>
+          <p class="text-sm text-muted-foreground">Verified Handymen</p>
+        </div>
+        <div>
+          <p class="text-3xl font-bold text-primary">4.8★</p>
+          <p class="text-sm text-muted-foreground">Average Rating</p>
+        </div>
+        <div>
+          <p class="text-3xl font-bold text-primary">30 min</p>
+          <p class="text-sm text-muted-foreground">Avg. First Bid</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-16 px-4 bg-primary text-primary-foreground">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">Ready to Get Started?</h2>
+      <p class="text-xl mb-8">
+        Post your job now and receive competitive bids from Toronto's best handymen
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#post-job" class="bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+          Post a Job Free
+        </a>
+        <a href="tel:416-555-0123" class="bg-primary-foreground/20 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-foreground/30 transition">
+          Call 416-555-0123
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

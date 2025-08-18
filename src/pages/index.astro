@@ -1,0 +1,526 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { EnhancedBookingWidget } from '../components/EnhancedBookingWidget';
+import { EnhancedHero } from '../components/EnhancedHero';
+import { ServiceCards } from '../components/ServiceCards';
+import { Badge } from '../components/ui/badge';
+import { Card, CardContent } from '../components/ui/card';
+import '../styles/animations.css';
+
+// Comprehensive LocalBusiness schema
+const jsonLdLocalBusiness = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "MasterBuildX",
+  "image": "https://masterbuildx.com/og-image.jpg",
+  "url": "https://masterbuildx.com",
+  "telephone": "437-545-0067",
+  "priceRange": "$75-$180",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 King Street West",
+    "addressLocality": "Toronto",
+    "addressRegion": "ON",
+    "postalCode": "M5V 1J2",
+    "addressCountry": "CA"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 43.6532,
+    "longitude": -79.3832
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "247"
+  },
+  "areaServed": [
+    {"@type": "City", "name": "Toronto"},
+    {"@type": "City", "name": "North York"},
+    {"@type": "City", "name": "Etobicoke"},
+    {"@type": "City", "name": "Scarborough"},
+    {"@type": "City", "name": "Mississauga"},
+    {"@type": "City", "name": "Vaughan"}
+  ],
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "opens": "08:00",
+    "closes": "20:00"
+  },
+  "sameAs": [
+    "https://g.page/masterbuildx",
+    "https://facebook.com/masterbuildx",
+    "https://instagram.com/masterbuildx"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Handyman Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "General Handyman",
+          "description": "TV mounting, furniture assembly, drywall patches, door adjustments"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Licensed Electrical",
+          "description": "ESA Licensed Electrical Contractor for outlets, fixtures, switches"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Licensed Plumbing",
+          "description": "306A Licensed Plumber for repairs and installations"
+        }
+      }
+    ]
+  }
+};
+---
+
+<Layout title="Same-Day Handyman Toronto | MasterBuildX | Homes, Condos & Offices | WSIB Insured">
+  <Fragment slot="head">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S8GG8BESC3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-S8GG8BESC3');
+    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLdLocalBusiness)} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  </Fragment>
+
+  <!-- Enhanced Hero Section -->
+  <EnhancedHero client:load />
+
+  <!-- Booking Widget Section -->
+  <section class="py-12 px-4 bg-gradient-to-b from-white to-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-8 animate-fade-in">
+        <h2 class="text-3xl font-bold mb-4">How Can We Help You Today?</h2>
+        <p class="text-gray-600">Choose the option that works best for you</p>
+      </div>
+      <EnhancedBookingWidget client:idle />
+    </div>
+  </section>
+
+  <!-- Quick Services Grid with animations -->
+  <section class="py-12 px-4 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold mb-4">Popular Services This Week</h2>
+        <p class="text-gray-600">Top requests from your neighbors</p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Instant Services -->
+        <Card className="group hover-lift bg-gradient-to-br from-green-50 to-emerald-50 border-green-200 transition-all duration-300">
+          <CardContent className="pt-6">
+            <div class="flex items-center justify-between mb-4">
+              <div class="p-3 bg-green-100 rounded-full group-hover:scale-110 transition-transform">
+                <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <Badge className="bg-green-600 text-white">Most Popular</Badge>
+            </div>
+            <h3 class="font-bold text-lg mb-3">🔨 Instant Handyman</h3>
+            <ul class="space-y-2 text-sm">
+              <li class="flex items-center gap-2">
+                <span class="text-green-500">✓</span> TV & art mounting
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-green-500">✓</span> Furniture assembly
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-green-500">✓</span> Drywall patches
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-green-500">✓</span> Door & cabinet fixes
+              </li>
+            </ul>
+            <div class="mt-4 pt-4 border-t border-green-200">
+              <p class="font-bold text-lg">$75-125/hour</p>
+              <p class="text-xs text-gray-600">Same-day available</p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <!-- Licensed Electrical -->
+        <Card className="group hover-lift bg-gradient-to-br from-yellow-50 to-orange-50 border-yellow-200 transition-all duration-300">
+          <CardContent className="pt-6">
+            <div class="flex items-center justify-between mb-4">
+              <div class="p-3 bg-yellow-100 rounded-full group-hover:scale-110 transition-transform">
+                <svg class="h-6 w-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <Badge className="bg-yellow-600 text-white">Licensed</Badge>
+            </div>
+            <h3 class="font-bold text-lg mb-3">⚡ Licensed Electrical</h3>
+            <ul class="space-y-2 text-sm">
+              <li class="flex items-center gap-2">
+                <span class="text-yellow-500">✓</span> Outlet replacement
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-yellow-500">✓</span> Light fixtures
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-yellow-500">✓</span> Ceiling fans
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-yellow-500">✓</span> Smart switches
+              </li>
+            </ul>
+            <div class="mt-4 pt-4 border-t border-yellow-200">
+              <p class="font-bold text-lg">$150-180/hour</p>
+              <p class="text-xs text-gray-600">ESA Licensed Contractor</p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <!-- Licensed Plumbing -->
+        <Card className="group hover-lift bg-gradient-to-br from-blue-50 to-cyan-50 border-blue-200 transition-all duration-300">
+          <CardContent className="pt-6">
+            <div class="flex items-center justify-between mb-4">
+              <div class="p-3 bg-blue-100 rounded-full group-hover:scale-110 transition-transform">
+                <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                </svg>
+              </div>
+              <Badge className="bg-blue-600 text-white">306A Licensed</Badge>
+            </div>
+            <h3 class="font-bold text-lg mb-3">🚿 Licensed Plumbing</h3>
+            <ul class="space-y-2 text-sm">
+              <li class="flex items-center gap-2">
+                <span class="text-blue-500">✓</span> Faucet repairs
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-blue-500">✓</span> Toilet fixes
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-blue-500">✓</span> Drain cleaning
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-blue-500">✓</span> Valve replacement
+              </li>
+            </ul>
+            <div class="mt-4 pt-4 border-t border-blue-200">
+              <p class="font-bold text-lg">$140-170/hour</p>
+              <p class="text-xs text-gray-600">306A Licensed Plumber</p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Types with hover effects -->
+  <section class="py-12 px-4 bg-gradient-to-b from-gray-50 to-white">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-8">Choose Your Space</h2>
+      <ServiceCards client:visible />
+    </div>
+  </section>
+
+  <!-- Enhanced Pricing Section -->
+  <section class="py-12 px-4 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold mb-4">Simple, Transparent Pricing</h2>
+        <p class="text-gray-600">No hidden fees • First hour minimum • Then 30-min increments</p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <Card className="relative overflow-hidden hover-lift">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-400/20 to-blue-400/20 rounded-full blur-2xl" />
+          <CardContent className="relative pt-6">
+            <h3 class="font-bold text-lg mb-4">Standard Services</h3>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                <span>Handyman tasks</span>
+                <strong class="text-green-600">$75-125/hr</strong>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                <span>First hour minimum</span>
+                <strong>Required</strong>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                <span>After first hour</span>
+                <strong>30-min blocks</strong>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                <span>Materials</span>
+                <strong>Cost + 10%</strong>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="relative overflow-hidden hover-lift">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-2xl" />
+          <CardContent className="relative pt-6">
+            <h3 class="font-bold text-lg mb-4">Licensed Trades</h3>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center p-3 bg-yellow-50 rounded-lg">
+                <span>ESA Electrician</span>
+                <strong class="text-yellow-600">$150-180/hr</strong>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+                <span>306A Plumber</span>
+                <strong class="text-blue-600">$140-170/hr</strong>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-orange-50 rounded-lg">
+                <span>TSSA Gas Tech</span>
+                <strong class="text-orange-600">$160-190/hr</strong>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-purple-50 rounded-lg">
+                <span class="text-sm">Complex jobs</span>
+                <strong class="text-purple-600">Get quotes</strong>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div class="mt-8 text-center">
+        <div class="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 rounded-lg px-4 py-3">
+          <svg class="h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <p class="text-sm">
+            <strong>Price Match Guarantee:</strong> Found a lower quote? We'll match it!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Condo & Office Ready with animations -->
+  <section class="py-12 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-black/20" />
+    <div class="relative max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold text-center mb-8">Condo & Office Ready</h2>
+      <div class="grid md:grid-cols-3 gap-6 text-center">
+        <div class="p-6 bg-white/10 backdrop-blur rounded-lg hover:bg-white/20 transition-all">
+          <div class="inline-flex items-center justify-center w-12 h-12 bg-white/20 rounded-full mb-3">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <h3 class="font-bold mb-2">COI Provided</h3>
+          <p class="text-sm opacity-90">Building listed as certificate holder</p>
+        </div>
+        <div class="p-6 bg-white/10 backdrop-blur rounded-lg hover:bg-white/20 transition-all">
+          <div class="inline-flex items-center justify-center w-12 h-12 bg-white/20 rounded-full mb-3">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="font-bold mb-2">WSIB eClearance</h3>
+          <p class="text-sm opacity-90">Instant verification link</p>
+        </div>
+        <div class="p-6 bg-white/10 backdrop-blur rounded-lg hover:bg-white/20 transition-all">
+          <div class="inline-flex items-center justify-center w-12 h-12 bg-white/20 rounded-full mb-3">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="font-bold mb-2">After-Hours</h3>
+          <p class="text-sm opacity-90">Evenings & weekends OK</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Handle vs Licensed -->
+  <section class="py-12 px-4 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-8">What We Do vs. When You Need Licensed Pros</h2>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <Card className="bg-green-50 border-green-200">
+          <CardContent className="pt-6">
+            <h3 class="font-bold text-lg mb-4 text-green-800">✓ We Handle Directly:</h3>
+            <ul class="space-y-2 text-sm">
+              <li>• TV mounting, picture hanging</li>
+              <li>• Furniture & equipment assembly</li>
+              <li>• Drywall patches & paint touch-ups</li>
+              <li>• Door adjustments & hardware</li>
+              <li>• Caulking & weatherstripping</li>
+              <li>• Shelving & organization</li>
+              <li>• Minor tile & grout repairs</li>
+              <li>• Basic fixture swaps (non-electrical)</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-blue-50 border-blue-200">
+          <CardContent className="pt-6">
+            <h3 class="font-bold text-lg mb-4 text-blue-800">→ We Coordinate Licensed Pros:</h3>
+            <ul class="space-y-2 text-sm">
+              <li><strong>Electrical:</strong> ESA-Licensed (outlets, switches, fixtures)</li>
+              <li><strong>Gas:</strong> TSSA-certified (furnaces, water heaters)</li>
+              <li><strong>Plumbing:</strong> 306A Licensed (pipes, valves, drains)</li>
+              <li><strong>Structural:</strong> Permitted work via City of Toronto</li>
+            </ul>
+            <p class="mt-4 p-3 bg-white rounded text-xs">
+              For these, use "Get Bids" to receive quotes from verified specialists
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <!-- Drain Emergency Notice -->
+  <section class="py-8 px-4 bg-yellow-50">
+    <div class="max-w-3xl mx-auto">
+      <Card className="bg-white border-yellow-300">
+        <CardContent className="pt-6">
+          <h3 class="font-bold mb-3">⚠️ Drain & Sewer Issues?</h3>
+          <div class="space-y-2 text-sm">
+            <p><strong>One fixture slow?</strong> We can help - book now or text photos</p>
+            <p><strong>Water backing up from floor drain?</strong> Call 311 immediately - City must check main line</p>
+            <p class="text-xs text-gray-600">The City owns the sewer to your property line; you own from there to the house</p>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  </section>
+
+  <!-- Recent Jobs with hover effects -->
+  <section class="py-12 px-4 bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-8">This Week in Toronto</h2>
+      
+      <div class="grid md:grid-cols-4 gap-4">
+        {[
+          { area: "Liberty Village", job: "65\" TV mount on concrete", time: "90 min", price: "$145", color: "blue" },
+          { area: "Yorkville", job: "3 IKEA PAX wardrobes", time: "3.5 hours", price: "$315", color: "green" },
+          { area: "Beaches", job: "8\" drywall patch + paint", time: "2 hours", price: "$180", color: "purple" },
+          { area: "North York", job: "Toilet repair (306A)", time: "1 hour", price: "$140", color: "orange" }
+        ].map((job, i) => (
+          <Card key={i} className="hover-lift group">
+            <CardContent className="pt-4">
+              <div class={`inline-flex items-center gap-1 text-xs bg-${job.color}-100 text-${job.color}-700 px-2 py-1 rounded-full mb-2`}>
+                <svg class="h-3 w-3" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                </svg>
+                {job.area}
+              </div>
+              <p class="text-sm text-gray-600 mb-2">{job.job}</p>
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-medium">{job.time}</span>
+                <span class="font-bold text-green-600">{job.price}</span>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Section -->
+  <section class="py-12 px-4 bg-white">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-8">Why Toronto Trusts Us</h2>
+      
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <div class="p-6">
+          <div class="text-4xl mb-3">🛡️</div>
+          <h3 class="font-bold mb-2">Fully Insured</h3>
+          <p class="text-sm text-gray-600">$2M liability coverage for your peace of mind</p>
+        </div>
+        <div class="p-6">
+          <div class="text-4xl mb-3">⭐</div>
+          <h3 class="font-bold mb-2">4.9/5 Rating</h3>
+          <p class="text-sm text-gray-600">Based on 247 verified Google reviews</p>
+        </div>
+        <div class="p-6">
+          <div class="text-4xl mb-3">⚡</div>
+          <h3 class="font-bold mb-2">Fast Response</h3>
+          <p class="text-sm text-gray-600">Average arrival time under 1 hour</p>
+        </div>
+      </div>
+
+      <Card className="bg-gradient-to-r from-green-50 to-blue-50 border-green-200">
+        <CardContent className="pt-6">
+          <p class="text-lg font-medium mb-4">
+            "The best handyman service in Toronto! Fixed my condo's electrical issue same day, 
+            provided all the proper documentation for management, and the price was exactly as quoted."
+          </p>
+          <div class="flex items-center justify-center gap-4">
+            <div class="flex gap-1">
+              {[...Array(5)].map((_, i) => (
+                <svg key={i} class="h-5 w-5 fill-yellow-400 text-yellow-400" viewBox="0 0 24 24">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              ))}
+            </div>
+            <span class="font-semibold">Sarah M. • Liberty Village</span>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  </section>
+
+  <!-- Final CTA with gradient -->
+  <section class="py-16 px-4 bg-gradient-to-br from-blue-600 via-purple-600 to-blue-600 text-white relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute inset-0 bg-gradient-to-r from-blue-600/50 to-purple-600/50 animate-gradient" />
+    </div>
+    
+    <div class="relative max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-4">Ready to Get Started?</h2>
+      <p class="text-xl mb-8 opacity-95">
+        Join 2,500+ happy customers across Toronto & GTA
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+        <a 
+          href="tel:416-555-0123" 
+          class="inline-flex items-center justify-center bg-white text-blue-600 px-8 py-4 rounded-lg font-bold hover:shadow-2xl transform hover:scale-105 transition-all"
+        >
+          <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          437-545-0067
+        </a>
+        <a 
+          href="sms:437-545-0067" 
+          class="inline-flex items-center justify-center bg-white/20 backdrop-blur text-white px-8 py-4 rounded-lg font-bold hover:bg-white/30 transform hover:scale-105 transition-all"
+        >
+          <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+          Text Photos
+        </a>
+      </div>
+      
+      <p class="text-sm opacity-90">
+        Mon-Sat 8am-8pm • Sun 10am-6pm • service@masterbuildx.com
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 py-8 px-4">
+    <div class="max-w-4xl mx-auto text-center text-xs space-y-2">
+      <p><strong>Service Area:</strong> Toronto, North York, Etobicoke, Scarborough, Mississauga, Vaughan, Richmond Hill, Markham</p>
+      <p><strong>Compliance:</strong> WSIB clearance required • ESA for electrical • 306A for plumbing • TSSA for gas</p>
+      <p>© 2024 MasterBuildX • Toronto, ON • <a href="https://g.page/masterbuildx" class="text-blue-400 hover:underline">Google Reviews</a></p>
+    </div>
+  </footer>
+</Layout>

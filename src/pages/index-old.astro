@@ -1,0 +1,421 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { BookingWidget } from '../components/BookingWidget';
+import { ServiceCards } from '../components/ServiceCards';
+import { PricingTable } from '../components/PricingTable';
+import { FAQ } from '../components/FAQ';
+import { Badge } from '../components/ui/badge';
+import { Card, CardContent } from '../components/ui/card';
+
+const jsonLdLocalBusiness = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "RenoNext Handyman",
+  "url": "https://renonext.com",
+  "image": "https://renonext.com/og-image.jpg",
+  "telephone": "416-555-0123",
+  "priceRange": "$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 King Street West",
+    "addressLocality": "Toronto",
+    "addressRegion": "ON",
+    "postalCode": "M5V 1J2",
+    "addressCountry": "CA"
+  },
+  "areaServed": [
+    {"@type": "City", "name": "Toronto"},
+    {"@type": "City", "name": "Mississauga"},
+    {"@type": "City", "name": "Vaughan"}
+  ],
+  "sameAs": [
+    "https://g.page/renonext",
+    "https://facebook.com/renonext",
+    "https://instagram.com/renonext"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Handyman & Licensed Trade Services",
+    "itemListElement": [
+      {"@type": "Offer", "category": "Furniture & Mounting", "itemOffered": {"@type": "Service", "name": "TV Wall Mount (studs)"}},
+      {"@type": "Offer", "category": "Walls & Paint", "itemOffered": {"@type": "Service", "name": "Drywall Patch (6–8 in.)"}},
+      {"@type": "Offer", "category": "Electrical", "itemOffered": {"@type": "Service", "name": "Light Fixture Swap (LEC)"}},
+      {"@type": "Offer", "category": "Plumbing", "itemOffered": {"@type": "Service", "name": "Toilet Fill/Flush Repair (306A)"}}
+    ]
+  }
+};
+
+const jsonLdFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do you work in condos and offices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We provide COI, handle elevator bookings and can work after-hours. We include a WSIB eClearance link in the work order."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who performs electrical work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Electrical work is performed by or under the permit of an ESA-Licensed Electrical Contractor (ECRA/ESA)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a building permit for repairs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Many small repairs don't. Structural or material alterations may. We'll advise and, if needed, help with City of Toronto permits."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Basement floor drain is backing up — what do I do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If water is coming up through the basement floor drain, call 311 so Toronto Water can investigate. The City owns the line to the property line; the homeowner owns from the line into the house."
+      }
+    }
+  ]
+};
+---
+
+<Layout title="Same-Day Handyman Toronto | Homes, Condos & Offices | Book or Get Bids">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLdLocalBusiness)} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLdFAQ)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-b from-slate-50 to-white py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          Same-Day Handyman for Homes, Condos & Offices — Toronto/GTA
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+          Small fixes to furniture builds, done right and on time. <strong>Book now</strong> for a 2-hour arrival window or <strong>post your job</strong> and compare licensed bids for regulated work.
+        </p>
+        
+        <!-- Proof Bar -->
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+          <Badge variant="secondary" className="px-3 py-1">WSIB-cleared</Badge>
+          <Badge variant="secondary" className="px-3 py-1">Insured</Badge>
+          <Badge variant="secondary" className="px-3 py-1">Condo/Office COI</Badge>
+          <Badge variant="secondary" className="px-3 py-1">Licensed partners (ESA/TSSA/306A)</Badge>
+          <Badge variant="secondary" className="px-3 py-1">Photo upload for fast triage</Badge>
+        </div>
+
+        <p class="text-sm text-muted-foreground italic mb-8">
+          *Electrical work by ESA-Licensed Electrical Contractors; gas by TSSA-certified techs; substantive plumbing by 306A plumbers.
+        </p>
+
+        <!-- CTA Buttons -->
+        <BookingWidget client:load />
+
+        <p class="text-sm text-gray-500 mt-6">
+          <em>Serving Toronto, North York, Etobicoke, Scarborough, Mississauga, Vaughan and nearby.</em>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marketplace CTA -->
+  <section class="py-12 px-4 bg-gradient-to-r from-primary/10 to-primary/5">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-2xl font-bold mb-4">Two Ways to Get Help</h2>
+      <p class="text-lg text-gray-600 mb-6">
+        Get competitive bids OR set your own budget - perfect for any job size or budget!
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/marketplace" class="inline-flex items-center justify-center px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition">
+          <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          Browse 100+ Services
+        </a>
+        <a href="/marketplace" class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg font-semibold hover:opacity-90 transition">
+          <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Name Your Price Option
+        </a>
+      </div>
+      <div class="inline-flex items-center px-4 py-3 bg-secondary text-secondary-foreground rounded-lg mt-4">
+        <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+        </svg>
+        2,500+ Jobs Completed
+      </div>
+    </div>
+  </section>
+
+  <!-- Choose Your Space -->
+  <section class="py-16 px-4 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-4">Choose Your Space</h2>
+        <p class="text-lg text-muted-foreground">
+          Specialized service for every property type
+        </p>
+      </div>
+      <ServiceCards client:load />
+    </div>
+  </section>
+
+  <!-- Services Directory -->
+  <section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-4">Services Directory</h2>
+        <p class="text-lg text-muted-foreground">
+          Professional repairs and installations for every part of your property
+        </p>
+      </div>
+      
+      <!-- Note about WSIB -->
+      <Card className="mb-8 bg-blue-50 border-blue-200">
+        <CardContent className="pt-6">
+          <p class="text-sm text-center">
+            <strong>Note:</strong> We include a WSIB eClearance link on every work order so building managers can verify in seconds.
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="py-16 px-4 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <PricingTable client:load />
+    </div>
+  </section>
+
+  <!-- Condo & Office Readiness -->
+  <section class="py-12 px-4 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <Card className="bg-primary text-primary-foreground">
+        <CardContent className="pt-6">
+          <h3 class="text-xl font-bold mb-4 text-center">Condo & Office Readiness</h3>
+          <div class="grid md:grid-cols-3 gap-6 text-center">
+            <div>
+              <p class="font-semibold">COI provided</p>
+              <p class="text-sm opacity-90">List your building as certificate holder</p>
+            </div>
+            <div>
+              <p class="font-semibold">Elevator bookings handled</p>
+              <p class="text-sm opacity-90">Protection mats and guards included</p>
+            </div>
+            <div>
+              <p class="font-semibold">WSIB clearance</p>
+              <p class="text-sm opacity-90">Link on every work order for easy verification</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  </section>
+
+  <!-- What We Do vs Licensed Trades -->
+  <section class="py-16 px-4 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-12">What We Do vs. Licensed Trades</h2>
+      
+      <div class="grid md:grid-cols-2 gap-8">
+        <Card>
+          <CardContent className="pt-6">
+            <h3 class="font-bold text-lg mb-4">We Handle:</h3>
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <span class="text-green-500 mr-2">✓</span>
+                <span>Caulking, hardware, shelving</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-500 mr-2">✓</span>
+                <span>Drywall patches, TV/board mounting</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-500 mr-2">✓</span>
+                <span>Door fixes, minor tile/grout</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-500 mr-2">✓</span>
+                <span>Small plumbing fixture parts (as scoped)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-500 mr-2">✓</span>
+                <span>Small electrical accessory swaps*</span>
+              </li>
+            </ul>
+            <p class="text-xs text-muted-foreground mt-4">
+              *Only when performed by/under an ESA-licensed contractor
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="pt-6">
+            <h3 class="font-bold text-lg mb-4">We Coordinate Licensed Pros:</h3>
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <span class="text-blue-500 mr-2">→</span>
+                <span><strong>Electrical:</strong> ESA-Licensed Electrical Contractor</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-blue-500 mr-2">→</span>
+                <span><strong>Gas:</strong> TSSA-licensed technician</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-blue-500 mr-2">→</span>
+                <span><strong>Plumbing:</strong> 306A Plumber (compulsory trade)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-blue-500 mr-2">→</span>
+                <span><strong>Permits:</strong> Structural/material alterations via City</span>
+              </li>
+            </ul>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <!-- Drain & Sewer Triage -->
+  <section class="py-12 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <Card className="bg-yellow-50 border-yellow-200">
+        <CardContent className="pt-6">
+          <h3 class="font-bold text-lg mb-4">Drain & Sewer Triage</h3>
+          <div class="space-y-3">
+            <div class="flex items-start">
+              <span class="text-yellow-600 mr-2">•</span>
+              <p><strong>One fixture slow/clogged?</strong> Likely local—book us with photos.</p>
+            </div>
+            <div class="flex items-start">
+              <span class="text-red-600 mr-2">•</span>
+              <p><strong>Water rising from the basement floor drain?</strong> Call 311 so the City can check the service line (City owns to the property line). We'll coordinate a licensed plumber if it's on the homeowner side.</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  </section>
+
+  <!-- Mini Case Studies -->
+  <section class="py-16 px-4 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-12">Recent Projects</h2>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Card>
+          <CardContent className="pt-6">
+            <h4 class="font-semibold mb-2">Leslieville condo</h4>
+            <p class="text-sm text-muted-foreground">TV mount on metal studs + in-wall channel</p>
+            <p class="text-sm font-medium mt-2">90 min</p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="pt-6">
+            <h4 class="font-semibold mb-2">Danforth semi</h4>
+            <p class="text-sm text-muted-foreground">8" drywall patch + paint blend</p>
+            <p class="text-sm font-medium mt-2">120 min</p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="pt-6">
+            <h4 class="font-semibold mb-2">Liberty Village office</h4>
+            <p class="text-sm text-muted-foreground">6 sit-stand desks + cable tidy</p>
+            <p class="text-sm font-medium mt-2">3.5 h</p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="pt-6">
+            <h4 class="font-semibold mb-2">Etobicoke bungalow</h4>
+            <p class="text-sm text-muted-foreground">Door plane & strike adjust</p>
+            <p class="text-sm font-medium mt-2">60 min</p>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-12">Customer Reviews</h2>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <Card>
+          <CardContent className="pt-6">
+            <p class="italic mb-4">"Booked a same-day 2-hour window and they were on time. Shared photos, got a fair range, and the drywall blend is invisible."</p>
+            <p class="font-semibold">— M., Toronto</p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="pt-6">
+            <p class="italic mb-4">"Condo board needed COI + WSIB; link was in the work order. Super easy."</p>
+            <p class="font-semibold">— A., North York</p>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-16 px-4 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <FAQ client:load />
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-16 px-4 bg-primary text-primary-foreground">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6">Ready to go?</h2>
+      <p class="text-xl mb-8">
+        <strong>Book Now</strong> for a 2-hour arrival window • 
+        <strong>Text Photos</strong> for a fast estimate • 
+        <strong>Get Bids</strong> for licensed/complex jobs.
+      </p>
+      
+      <div class="space-y-2">
+        <p class="text-lg">
+          <strong>Call:</strong> 416-555-0123 • 
+          <strong>Hours:</strong> Mon-Sat 8am-8pm, Sun 10am-6pm
+        </p>
+        <p class="text-lg">
+          <strong>Email:</strong> service@renonext.com
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 py-12 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center">
+        <h3 class="text-white font-bold text-xl mb-4">RenoNext Handyman — Toronto/GTA</h3>
+        <p class="mb-2">123 King Street West, Toronto, ON M5V 1J2</p>
+        <p class="mb-4">416-555-0123 • service@renonext.com</p>
+        <p class="text-sm">Serving: Toronto, Mississauga, Vaughan, North York, Etobicoke, Scarborough.</p>
+      </div>
+      
+      <div class="mt-8 pt-8 border-t border-gray-800 text-xs text-center space-y-2">
+        <p><strong>WSIB:</strong> Principals must obtain WSIB clearance before construction work and ensure it remains valid through the job.</p>
+        <p><strong>Electrical:</strong> Ontario law restricts electrical work for hire to ESA-Licensed Electrical Contractors (ECRA/ESA).</p>
+        <p><strong>Plumbing:</strong> Plumber (306A) is a compulsory trade; substantive plumbing is performed by licensed plumbers.</p>
+        <p><strong>Gas:</strong> Fuel-burning equipment work is performed by TSSA-certified technicians.</p>
+        <p><strong>Sewer backups:</strong> Report to 311 so the City can investigate; City responsibility extends to the property line.</p>
+      </div>
+    </div>
+  </footer>
+</Layout>
